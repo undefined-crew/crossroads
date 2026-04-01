@@ -1,0 +1,8 @@
+.loginBtn {
+  cursor: pointer;
+  background-color: var(--accent-primary);
+  color: var(--color-primary);
+  border-radius: 7px;
+  padding: 0.3rem 1.2rem;
+  font-weight: 500;
+}

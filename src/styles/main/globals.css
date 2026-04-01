@@ -1,3 +1,40 @@
+:root {
+  /* background */
+  --bg-color: #0e0e10;
+  --bg-color-card: #17171a;
+  --bg-color-elevated: #1f1f23;
+  --bg-color-high-surface: #27272c;
+
+  /* border */
+  --border-color: #2a2a30;
+  --border-color-hover: #3a3a42;
+
+  /* text */
+  --color-primary: #e8e8ee;
+  --color-secondary: #8888a0;
+  --color-placeholder: #6b7280;
+
+  /* accent */
+  --accent-primary: #6b8cff;
+  --accent-light: #a8bcff;
+  --accent-bg-tint: rgba(107, 140, 255, 0.10);
+  --accent-border-tint: rgba(107, 140, 255, 0.25);
+
+  /* category */
+  --color-finance: #c9a227;
+  --bg-color-finance: #2a2410;
+  --color-housing: #c2622a;
+  --bg-color-housing: #2a1a0e;
+  --color-health: #c24242;
+  --bg-color-health: #2a1212;
+  --color-career: #5b8ef0;
+  --bg-color-career: #101828;
+  --color-legal: #3a9e60;
+  --bg-color-legal: #0e2018;
+  --color-social: #a060e0;
+  --bg-color-social: #1e1028;
+}
+
 html {
   height: 100%;
 }
@@ -10,9 +47,10 @@ body {
 
 body {
   min-height: 100%;
-  font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-color);
+  color: var(--color-primary);
 }
 
 * {
@@ -24,4 +62,17 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--bg-color-elevated);
+  border-radius: 5px;
 }
