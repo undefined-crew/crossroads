@@ -1,8 +1,14 @@
+"use client"
+
 import Link from "next/link"
+import Profile from "./Profile"
 import LoginBtn from "../utils/LoginBtn"
+import { useUser } from "@/lib/hooks/useUser"
 import styles from "@/styles/ui/nav.module.css"
 
 export default function Nav() {
+  const user = useUser()
+
   return (
     <div className={styles.nav}>
       <Link href="/" style={{ fontSize: "1.15rem" }}>
@@ -12,7 +18,7 @@ export default function Nav() {
       <div style={{ display: "flex", alignItems: "center", gap: 30 }}>
         <Link href="/scenarios" className={styles.navLink}>Scenarios</Link>
         <Link href="/about" className={styles.navLink}>About</Link>
-        <LoginBtn />
+        {user ? <Profile /> : <LoginBtn />}
       </div>
     </div>
   )

@@ -33,6 +33,9 @@
   --bg-color-legal: #0e2018;
   --color-social: #a060e0;
   --bg-color-social: #1e1028;
+
+  /* colors */
+  --color-red: #ef4c2f;
 }
 
 html {
