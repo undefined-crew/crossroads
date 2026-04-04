@@ -1,28 +1,28 @@
-"use client"
+"use client";
 
-import { auth } from "@/lib/auth/firebase"
-import { useEffect, useState } from "react"
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth"
-import styles from "@/styles/utils/loginBtn.module.css"
+import { auth } from "@/lib/auth/firebase";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { Button } from "../ui/button";
 
 export default function LoginBtn() {
-  const provider = new GoogleAuthProvider()
-  const [username, setUsername] = useState("")
-
-  useEffect(() => {
-    console.log("username: ", username)
-  }, [username])
+  const provider = new GoogleAuthProvider();
 
   function handleSignIn() {
-    signInWithPopup(auth, provider).then((result) => {
-      const { displayName } = result.user
-      if (displayName) {
-        setUsername(displayName)
-      }
-    }).catch((error) => {
-      console.error(error)
-    })
+    signInWithPopup(auth, provider)
+      .then(() => {
+        console.log("User signed in successfully");
+      })
+      .catch((error) => {
+        console.error("Error signing in: ", error);
+      });
   }
 
-  return <div className={styles.loginBtn} onClick={handleSignIn}>Login</div>
+  return (
+    <Button
+      onClick={handleSignIn}
+      className="cursor-pointer bg-accent-foreground hover:bg-accent-foreground/80 text-primary-foreground text-sm"
+    >
+      Login
+    </Button>
+  );
 }
