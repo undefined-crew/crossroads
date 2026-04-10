@@ -1,17 +1,37 @@
-import Sidebar from "@/components/Sidebar";
-import { Button } from "@/components/ui/button";
-import { Field } from "@/components/ui/field";
-import { Textarea } from "@/components/ui/textarea";
-import { ArrowUpRight } from "lucide-react";
-import Link from "next/link";
+"use client"
+
+import Sidebar from "@/components/Sidebar"
+import { Button } from "@/components/ui/button"
+import { Field } from "@/components/ui/field"
+import { Textarea } from "@/components/ui/textarea"
+import { useUser } from "@/lib/hooks/useUser"
+import { createChat } from "@/lib/utils/chat"
+import { useChatStore } from "@/lib/utils/store"
+import { ArrowUpRight } from "lucide-react"
+import Link from "next/link"
+import { useRouter } from "next/navigation"
+import { useState } from "react"
 
 export default function Home() {
+  const router = useRouter()
+  const user = useUser()
+  const { initChat } = useChatStore()
+  const [prompt, setPrompt] = useState("")
   const suggestions = [
     "Paycheck confusion",
     "Hospital Bill",
     "Landlord issues",
     "Salary Question",
-  ];
+  ]
+
+  async function handleSubmit() {
+    if (!user) return
+    const chatId = crypto.randomUUID()
+    const { chatId: validChatId } = await createChat(user.uid, prompt)
+    initChat(validChatId, prompt)
+    router.push(`/chat/${chatId}`)
+  }
+
   return (
     <div className="flex h-[calc(100vh-82px)]">
       <div className="w-96 h-full hidden md:block">
@@ -46,11 +66,15 @@ export default function Home() {
               <Textarea
                 placeholder="Describe your situation... e.g. landlord won't fix the heat"
                 className="border-neutral-800 h-24 resize-none"
+                value={prompt}
+                onChange={(e) => setPrompt(e.target.value)}
+                id="prompt"
               />
               <Button
                 variant="secondary"
                 size="icon"
                 className="cursor-pointer bg-accent-foreground hover:bg-accent-foreground/80 text-primary-foreground"
+                onClick={handleSubmit}
               >
                 <ArrowUpRight />
               </Button>
@@ -59,5 +83,5 @@ export default function Home() {
         </div>
       </div>
     </div>
-  );
+  )
 }
